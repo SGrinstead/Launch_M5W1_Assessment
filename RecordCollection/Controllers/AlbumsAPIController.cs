@@ -9,10 +9,12 @@ namespace RecordCollection.Controllers
     public class AlbumsAPIController : ControllerBase
     {
         private readonly RecordCollectionContext _context;
+		private readonly Serilog.ILogger _logger;
 
-        public AlbumsAPIController(RecordCollectionContext context, Serilog.ILogger logger)
+		public AlbumsAPIController(RecordCollectionContext context, Serilog.ILogger logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public IActionResult GetAll()
@@ -25,6 +27,13 @@ namespace RecordCollection.Controllers
         public IActionResult GetOne(int id)
         {
             var album = _context.Albums.FirstOrDefault(a => a.Id == id);
+
+            if(album is null)
+            {
+                _logger.Warning("Album not found");
+                return NotFound();
+            }
+
             return new JsonResult(album);
         }
 
@@ -32,8 +41,17 @@ namespace RecordCollection.Controllers
         public void DeleteOne(int id)
         {
             var album = _context.Albums.FirstOrDefault(a => a.Id == id);
-            _context.Albums.Remove(album);
-            _context.SaveChanges();
-        }
-    }
+
+			if (album is null)
+			{
+				_logger.Warning("Album not found");
+			}
+            else
+            {
+				_context.Albums.Remove(album);
+				_context.SaveChanges();
+				_logger.Fatal($"Success! {album.Title} was removed from the database.");
+			}
+		}
+	}
 }
