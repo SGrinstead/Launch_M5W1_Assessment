@@ -1,0 +1,16 @@
+﻿How would you rate your comfort level and abilities when working with a SQL database? (3 points)
+
+I would say that I am fairly comfortable working with an SQL database. For my school projects we used PostgreSQL databases. We first learned SQL queries and how to interact with the
+database directly, then moved to using c# and .NET to interact with the database using tools like LINQ. I make sure to practice SQL queries to make sure I keep those skills sharp.
+One of my school projects was an MVC app where users could record messages that other users could see. I used an SQL database to save information about the users like their name and
+hashed passwords as well as their messages. Most of that application was some form of database interaction including saving to the database, editing information in the database, or removing
+something from the database.
+
+
+How do you familiarize yourself with a codebase you haven’t worked in before? (3 points)
+
+When I need to familiarize myself with a new codebase I start by running the application if I can before looking through the code to get an idea of the purpose of the program. Once I
+have done that, I will look at any models in the code as those are ususally the foundation of a lot of other pieces. Finally, I would look through the other major parts of the program 
+like Program.cs or any controllers if it is an MVC application. As an example, I had an exam on a codebase I hadn't seen before, so I ran the program and saw that it was an MVC app
+about albums where you could add albums to the list with a title, artist, and rating. Then I looked through the models, and there was just one Album class with those same properties and an id.
+From there I could look through the controllers and get a good idea of everthing the program was doing.
